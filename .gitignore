@@ -7283,3 +7283,4 @@ TowerGame/Temp/UnityTempFile-cb2b49a7e4bddde4eaa4331329cee2ef
 TowerGame/Library/InspectorExpandedItems.asset
 TowerGame/Library/ScriptAssemblies/Assembly-CSharp.dll
 TowerGame/Library/SourceAssetDB
+*.meta
