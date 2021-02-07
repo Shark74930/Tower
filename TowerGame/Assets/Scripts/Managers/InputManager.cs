@@ -45,7 +45,7 @@ public class InputManager : Singleton<InputManager>
         }
 
         _moveDir.x = Input.GetAxis("Horizontal");
-        //_moveDir.y = Input.GetAxis("Vertical");
+        _moveDir.z = Input.GetAxis("Vertical");
     }
     #endregion Methods
 }

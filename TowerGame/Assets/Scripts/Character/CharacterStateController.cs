@@ -12,11 +12,13 @@ public class CharacterStateController : MonoBehaviour
     [SerializeField] private float _castRadius = 0.45f;
     [Header("Speeds")]
     [SerializeField] private float _walkSpeed = 250f;
-    [SerializeField] private float _airControlForce = 250f;
+    [SerializeField] private float _airControlSpeed = 250f;
+    [SerializeField] private float rotateSpeed = 5;
     [Header("Jump")]
     [SerializeField] private float _jumpForce = 40f;
     [SerializeField] private int _jumpLimit = 0;
 
+    private Vector3 _direction = Vector3.zero;
     private int _jumpCount = 0;
     private bool _isGrounded = false;
     private RaycastHit _hit;
@@ -64,14 +66,7 @@ public class CharacterStateController : MonoBehaviour
 
     private void Update()
     {
-        if (_rb.velocity.x > 0)
-        {
-            transform.forward = Vector3.right;
-        }
-        else if (_rb.velocity.x < 0)
-        {
-            transform.forward = Vector3.left;
-        }
+       
     }
 
     public void FixedUpdate()
@@ -96,7 +91,19 @@ public class CharacterStateController : MonoBehaviour
     #region Physic
     public void Walk()
     {
-        _rb.velocity = InputManager.Instance.MoveDir * _walkSpeed;
+        float horizontalMove = Input.GetAxis("Horizontal");
+        float verticalMove = Input.GetAxis("Vertical");
+
+        _direction = new Vector3(x:horizontalMove, y:0.0f, z:verticalMove);
+
+        if (_direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_direction), rotateSpeed * Time.deltaTime);
+        }
+
+        _rb.MovePosition(transform.position + _walkSpeed * Time.deltaTime * _direction); 
+
+        //_rb.velocity = InputManager.Instance.MoveDir * _walkSpeed;
     }
 
     public void Jump()
@@ -109,10 +116,17 @@ public class CharacterStateController : MonoBehaviour
 
     public void AirControl()
     {
-        _rb.AddForce(InputManager.Instance.MoveDir * _airControlForce, ForceMode.Acceleration);
-        Vector3 tmpVel = _rb.velocity;
-        tmpVel.x = Mathf.Clamp(tmpVel.x, -_walkSpeed, _walkSpeed);
-        _rb.velocity = tmpVel;
+        float horizontalMove = Input.GetAxis("Horizontal");
+        float verticalMove = Input.GetAxis("Vertical");
+
+        _direction = new Vector3(x: horizontalMove, y: 0.0f, z: verticalMove);
+
+        if (_direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_direction), rotateSpeed * Time.deltaTime);
+        }
+
+        _rb.MovePosition(transform.position + _airControlSpeed * Time.deltaTime * _direction);
     }
     #endregion Physic
     #endregion Methods

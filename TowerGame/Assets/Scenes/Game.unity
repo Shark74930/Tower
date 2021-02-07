@@ -2326,6 +2326,16 @@ PrefabInstance:
       propertyPath: _groundLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 3587287849659775385, guid: 0058fee17cd6c534d99d11e9410b09d9,
+        type: 3}
+      propertyPath: rotateSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587287849659775385, guid: 0058fee17cd6c534d99d11e9410b09d9,
+        type: 3}
+      propertyPath: _airControlSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3587287849659775386, guid: 0058fee17cd6c534d99d11e9410b09d9,
         type: 3}
       propertyPath: m_RootOrder
@@ -2380,6 +2390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587287849659775387, guid: 0058fee17cd6c534d99d11e9410b09d9,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3587287850499635517, guid: 0058fee17cd6c534d99d11e9410b09d9, type: 3}
